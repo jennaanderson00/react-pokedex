@@ -15,6 +15,8 @@ function App() {
   }, [])
 
   const getPokemon = () => {
+    setError(null)
+    setLoading(true)
     fetch(`https://pokeapi.co/api/v2/pokemon/${searchTerm}`)
       .then(res => res.json())
       .then(json => setPokemon(json))
