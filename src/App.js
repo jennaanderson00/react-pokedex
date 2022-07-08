@@ -22,6 +22,23 @@ function App() {
       .finally(() => setLoading(false))
   }
 
+  const handleInputChange = () => {
+    setSearchTerm(e.target.value)
+  }
+
+  const handleFormSubmit = e => {
+    e.preventDefault()
+    if (!!searchTerm) {
+      getPokemon()
+    }
+  }
+  
+  const reset = () => {
+    setSearchTerm('')
+    setError(null)
+    setPokemon(null)
+  }
+
   const renderUI = () => {
     if (loading) 
       return <Spinner />
@@ -38,7 +55,12 @@ function App() {
   return (
     <>
       <Header />
-      <SearchForm />
+      <SearchForm 
+        searchTerm={searchTerm}
+        handleInputChange={handleInputChange}
+        handleFormSubmit={handleFormSubmit}
+        reset={reset}
+      />
       { renderUI() }
     </>
   );
